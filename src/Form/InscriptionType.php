@@ -20,15 +20,15 @@ class InscriptionType extends AbstractType
                 'label' => 'Nom complet'
             ])
             ->add('email', EmailType::class, [
-                'label' => 'Adresse email'
+                'label' => 'Adresse mail'
             ])
             ->add('telephone', TelType::class, [
-                'label' => 'Téléphone',
+                'label' => 'Numéro de téléphone',
                 'required' => false
             ])
             ->add('nombrePlaces', IntegerType::class, [
                 'label' => 'Nombre de places',
-                'attr' => ['min' => 1]
+                'attr' => ['min' => 1, 'max' => 10]
             ])
         ;
     }
