@@ -1,0 +1,24 @@
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>Titre</th>
+        <th>Date</th>
+        <th>Lieu</th>
+        <th>Catégorie</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for e in evenements %}
+        <tr>
+            <td>{{ e.titre }}</td>
+            <td>{{ e.date|date('d/m/Y') }}</td>
+            <td>{{ e.lieu }}</td>
+            <td>{{ e.relation.nom }}</td>
+        </tr>
+    {% else %}
+        <tr>
+            <td colspan="4">Aucun événement à venir</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
