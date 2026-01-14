@@ -28,6 +28,10 @@ class Inscription
     #[ORM\Column]
     private ?\DateTime $createdAt = null;
 
+    #[ORM\ManyToOne(inversedBy: 'inscriptions')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Evenement $relation = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -89,6 +93,18 @@ class Inscription
     public function setCreatedAt(\DateTime $createdAt): static
     {
         $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getRelation(): ?Evenement
+    {
+        return $this->relation;
+    }
+
+    public function setRelation(?Evenement $relation): static
+    {
+        $this->relation = $relation;
 
         return $this;
     }
