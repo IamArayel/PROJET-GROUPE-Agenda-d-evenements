@@ -9,11 +9,11 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
 class InscriptionController extends AbstractController
 {
-    #[Route('/evenement/{id}/inscription', name: 'app_inscription_new', methods: ['GET', 'POST'])]
+    #[Route('/inscription/{id}', name: 'app_inscription_new', methods: ['GET', 'POST'])]
     public function new(Request $request, Evenement $evenement, EntityManagerInterface $entityManager): Response
     {
         $inscription = new Inscription();

@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Inscription à {{ evenement.titre }}{% endblock %}
+{% block title %}{{ evenement.titre }}{% endblock %}
 
 {% block body %}
     <div class="container mt-4">
@@ -12,20 +12,21 @@
             {% endfor %}
         {% endfor %}
 
-        <h1>Inscription à l'événement : {{ evenement.titre }}</h1>
+        <h1>{{ evenement.titre }}</h1>
 
         <div class="card mb-4">
+            {% if evenement.image %}
+                <img src="{{ evenement.image }}" class="card-img-top" alt="{{ evenement.titre }}">
+            {% endif %}
             <div class="card-body">
+                <p class="card-text">{{ evenement.description }}</p>
                 <p><strong>Date :</strong> {{ evenement.date ? evenement.date|date('d/m/Y') : 'Non définie' }}</p>
                 <p><strong>Lieu :</strong> {{ evenement.lieu }}</p>
+                <p><strong>Catégorie :</strong> {{ evenement.relation.nom }}</p>
             </div>
         </div>
 
-        {{ form_start(form) }}
-            {{ form_widget(form) }}
-            <button class="btn btn-primary mt-3">{{ button_label|default("S'inscrire") }}</button>
-        {{ form_end(form) }}
-
-        <a href="{{ path('app_evenement_show', {'id': evenement.id}) }}" class="btn btn-secondary mt-3">Retour à l'événement</a>
+        <a href="{{ path('app_inscription_new', {'id': evenement.id}) }}" class="btn btn-primary">S'inscrire à cet événement</a>
+        <a href="{{ path('app_evenement_index') }}" class="btn btn-secondary">Retour à la liste</a>
     </div>
 {% endblock %}
