@@ -12,7 +12,7 @@
         <th>Catégorie</th>
     </tr>
     </thead>
-    <tbody>
+    <tbody id="events-body">
     {% for e in evenements %}
         <tr>
             <td><a href="{{ path('app_evenement_show', {'id': e.id}) }}">{{ e.titre }}</a></td>
@@ -27,4 +27,5 @@
     {% endfor %}
     </tbody>
 </table>
+
 {% endblock %}
