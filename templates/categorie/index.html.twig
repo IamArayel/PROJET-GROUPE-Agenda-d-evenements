@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Catégories{% endblock %}
+
+{% block body %}
+<h1>Catégories</h1>
+
+<ul>
+    {% for categorie in categories %}
+        <li>{{ categorie.nom ?? categorie.name ?? '—' }}</li>
+    {% else %}
+        <li>Aucune catégorie trouvée.</li>
+    {% endfor %}
+</ul>
+{% endblock %}

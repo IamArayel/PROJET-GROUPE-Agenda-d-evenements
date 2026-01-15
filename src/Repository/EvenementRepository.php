@@ -3,12 +3,10 @@
 namespace App\Repository;
 
 use App\Entity\Evenement;
+use App\Entity\Categorie;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
-/**
- * @extends ServiceEntityRepository<Evenement>
- */
 class EvenementRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
@@ -16,28 +14,30 @@ class EvenementRepository extends ServiceEntityRepository
         parent::__construct($registry, Evenement::class);
     }
 
-    //    /**
-    //     * @return Evenement[] Returns an array of Evenement objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('e')
-    //            ->andWhere('e.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('e.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
-
-    //    public function findOneBySomeField($value): ?Evenement
-    //    {
-    //        return $this->createQueryBuilder('e')
-    //            ->andWhere('e.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+    /**
+     * @return Evenement[]
+     */
+    public function findEvenementsFuturs(): array
+    {
+        return $this->createQueryBuilder('e')
+            ->andWhere('e.date >= :today')
+            ->setParameter('today', new \DateTime('today'))
+            ->orderBy('e.date', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+    /**
+     * @return Evenement[]
+     */
+    public function findFutursByCategorie(Categorie $categorie): array
+    {
+        return $this->createQueryBuilder('e')
+            ->andWhere('e.relation = :categorie')
+            ->andWhere('e.date >= :today')
+            ->setParameter('categorie', $categorie)
+            ->setParameter('today', new \DateTime('today'))
+            ->orderBy('e.date', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
 }
