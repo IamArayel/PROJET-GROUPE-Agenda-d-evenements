@@ -1,7 +1,8 @@
-{% extends 'base.html.twig'  %}
+{% extends 'base.html.twig' %}
+
+{% block title %}Événements{% endblock %}
 
 {% block body %}
-
 <table class="table table-striped">
     <thead>
     <tr>
@@ -14,7 +15,7 @@
     <tbody id="events-body">
     {% for e in evenements %}
         <tr>
-            <td>{{ e.titre }}</td>
+            <td><a href="{{ path('app_evenement_show', {'id': e.id}) }}">{{ e.titre }}</a></td>
             <td>{{ e.date|date('d/m/Y') }}</td>
             <td>{{ e.lieu }}</td>
             <td>{{ e.relation.nom }}</td>

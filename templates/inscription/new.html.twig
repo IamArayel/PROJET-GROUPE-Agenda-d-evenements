@@ -26,6 +26,6 @@
             <button class="btn btn-primary mt-3">{{ button_label|default("S'inscrire") }}</button>
         {{ form_end(form) }}
 
-        <a href="{{ path('app_evenement_show', {'id': evenement.id}) }}" class="btn btn-secondary mt-3">Retour à l'événement</a>
+        <a href="{{ path('app_events', {'id': evenement.id}) }}" class="btn btn-secondary mt-3">Retour à l'événement</a>
     </div>
 {% endblock %}
