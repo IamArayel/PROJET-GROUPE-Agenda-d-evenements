@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Admin - Inscriptions{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <h1>Gestion des inscriptions</h1>
+
+    <div class="card mb-4">
+        <div class="card-body">
+            <form method="get" class="row g-3 align-items-center">
+                <div class="col-auto">
+                    <label for="evenement" class="form-label">Filtrer par événement :</label>
+                </div>
+                <div class="col-auto">
+                    <select name="evenement" id="evenement" class="form-select">
+                        <option value="">Tous les événements</option>
+                        {% for evenement in evenements %}
+                            <option value="{{ evenement.id }}" {{ selectedEvenement == evenement.id ? 'selected' : '' }}>
+                                {{ evenement.titre }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-auto">
+                    <button type="submit" class="btn btn-primary">Filtrer</button>
+                    <a href="{{ path('app_admin_inscription_index') }}" class="btn btn-secondary">Réinitialiser</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="alert alert-info">
+        <strong>Total des places réservées : {{ totalPlaces }}</strong>
+    </div>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Nom</th>
+                <th>Email</th>
+                <th>Téléphone</th>
+                <th>Événement</th>
+                <th>Places</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for inscription in inscriptions %}
+            <tr>
+                <td>{{ inscription.createdAt|date('d/m/Y H:i') }}</td>
+                <td>{{ inscription.nom }}</td>
+                <td>{{ inscription.email }}</td>
+                <td>{{ inscription.telephone }}</td>
+                <td>{{ inscription.relation.titre }}</td>
+                <td>{{ inscription.nombrePlaces }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6" class="text-center">Aucune inscription trouvée.</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

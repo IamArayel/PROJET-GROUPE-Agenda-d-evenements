@@ -15,7 +15,7 @@
     <tbody>
     {% for e in evenements %}
         <tr>
-            <td>{{ e.titre }}</td>
+            <td><a href="{{ path('app_evenement_show', {'id': e.id}) }}">{{ e.titre }}</a></td>
             <td>{{ e.date|date('d/m/Y') }}</td>
             <td>{{ e.lieu }}</td>
             <td>{{ e.relation.nom }}</td>
