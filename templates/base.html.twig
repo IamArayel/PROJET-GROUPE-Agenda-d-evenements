@@ -24,11 +24,11 @@
                     {% for categorie in categories|default([]) %}
                         <li>
                             <a href="#" class="js-categorie hover:bg-white/20" data-id="{{ categorie.id }}">
-                                {{ categorie.nom }}
+                               {{ categorie.icone }} {{ categorie.nom }}
                             </a>
                         </li>
                     {% endfor %}
-                    <li><a href="{{ path('app_admin_inscription_index') }}" class="hover:bg-white/20">Admin</a></li>
+                    <li><a href="{{ path('app_admin_inscription_index') }}" class="hover:bg-white/20">⚙️ Admin</a></li>
                 </ul>
             </div>
         </header>
