@@ -14,7 +14,7 @@ final class EvenementController extends AbstractController
     /**
      * Display the list of future events.
      */
-    #[Route('/evenement', name: 'app_events', methods: ['GET'])]
+    #[Route('/evenement', name: 'app_evenement_index', methods: ['GET'])]
     public function index(EvenementRepository $repository, CategorieRepository $categorieRepository): Response
     {
         $evenements = $repository->findEvenementsFuturs();

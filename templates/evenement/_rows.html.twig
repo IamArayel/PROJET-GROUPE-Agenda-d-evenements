@@ -1,18 +1,36 @@
-{% for e in evenements %}
-    <tr>
-        <td>
-            <a href="{{ path('app_evenement_show', {'id': e.id}) }}">
-                {{ e.titre }}
-            </a>
-        </td>
-        <td>{{ e.date|date('d/m/Y') }}</td>
-        <td>{{ e.lieu }}</td>
-        <td>{{ e.relation.nom }}</td>
-    </tr>
+{% for evenement in evenements %}
+    <div class="card bg-base-100 shadow-xl hover:shadow-2xl transition-shadow duration-200">
+        {% if evenement.image %}
+            <figure><img src="{{ evenement.image }}" alt="{{ evenement.titre }}" class="w-full h-48 object-cover" /></figure>
+        {% endif %}
+        <div class="card-body">
+            <h2 class="card-title">
+                {{ evenement.titre }}
+                <div class="badge badge-secondary">{{ evenement.relation.nom }}</div>
+            </h2>
+            <p class="truncate">{{ evenement.description }}</p>
+            <div class="flex items-center text-sm text-gray-500 mt-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+                {{ evenement.date ? evenement.date|date('d/m/Y') : '' }}
+                <span class="mx-2">•</span>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+                {{ evenement.lieu }}
+            </div>
+            <div class="card-actions justify-end mt-4">
+                <a href="{{ path('app_evenement_show', {'id': evenement.id}) }}" class="btn btn-primary">Voir plus</a>
+            </div>
+        </div>
+    </div>
 {% else %}
-    <tr>
-        <td colspan="4" class="text-center">
-            Aucun événement pour cette catégorie
-        </td>
-    </tr>
+    <div class="col-span-full">
+        <div class="alert alert-info">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current shrink-0 w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            <span>Aucun événement trouvé pour cette catégorie.</span>
+        </div>
+    </div>
 {% endfor %}
