@@ -13,6 +13,9 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class InscriptionController extends AbstractController
 {
+    /**
+     * Handle new inscription for an event.
+     */
     #[Route('/inscription/{id}', name: 'app_inscription_new', methods: ['GET', 'POST'])]
     public function new(Request $request, Evenement $evenement, EntityManagerInterface $entityManager): Response
     {
