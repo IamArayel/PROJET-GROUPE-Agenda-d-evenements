@@ -1,3 +1,102 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    /* Couleurs du drapeau de la Réunion */
+    --reunion-blue: #007dc5;   /* Bleu océan */
+    --reunion-yellow: #ffd100; /* Jaune soleil */
+    --reunion-red: #d62b1e;    /* Rouge volcan */
+    --reunion-green: #009150;  /* Vert nature */
+}
+
+/* Personnalisation du thème DaisyUI */
+[data-theme="reunion"] {
+    /* Primary: Bleu (Océan) */
+    --p: 0.58 0.15 240;      /* HSL approx for #007dc5 */
+    --pf: 0.58 0.15 240;
+    --pc: 0 0 100;           /* Texte blanc sur primaire */
+
+    /* Secondary: Jaune (Soleil) */
+    --s: 48 100 50;          /* HSL approx for #ffd100 */
+    --sf: 48 100 40;
+    --sc: 0 0 0;             /* Texte noir sur secondaire */
+
+    /* Accent: Rouge (Volcan) */
+    --a: 356 75 48;          /* HSL approx for #d62b1e */
+    --af: 356 75 38;
+    --ac: 0 0 100;           /* Texte blanc sur accent */
+
+    /* Neutral: Gris foncé pour le texte et les fonds neutres */
+    --n: 215 28 17;
+    --nf: 215 28 10;
+    --nc: 0 0 100;
+
+    /* Base: Fond de page (blanc cassé / gris très clair) */
+    --b1: 0 0 100;           /* Blanc pur */
+    --b2: 210 20 98;         /* Gris très clair */
+    --b3: 210 20 95;         /* Gris clair */
+    --bc: 215 28 17;         /* Texte de base */
+
+    /* Info: Bleu clair */
+    --in: 198 93 60;
+    --inc: 0 0 0;
+
+    /* Success: Vert (Nature) */
+    --su: 153 100 28;        /* HSL approx for #009150 */
+    --suc: 0 0 100;
+
+    /* Warning: Orange */
+    --wa: 36 100 50;
+    --wac: 0 0 0;
+
+    /* Error: Rouge vif */
+    --er: 0 72 51;
+    --erc: 0 0 100;
+}
+
 body {
-    background-color: skyblue;
+    /* Application du dégradé subtil inspiré du drapeau en arrière-plan */
+    background: linear-gradient(135deg, #f0f9ff 0%, #fffbeb 100%);
+    min-height: 100vh;
+}
+
+.navbar {
+    background-color: var(--reunion-blue);
+    color: white;
+}
+
+.navbar a {
+    color: white;
+}
+
+.navbar a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.btn-primary {
+    background-color: var(--reunion-blue);
+    border-color: var(--reunion-blue);
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #0064a0;
+    border-color: #0064a0;
+}
+
+.badge-secondary {
+    background-color: var(--reunion-yellow);
+    color: black;
+    border: none;
+}
+
+.alert-success {
+    background-color: var(--reunion-green);
+    color: white;
+}
+
+.alert-error {
+    background-color: var(--reunion-red);
+    color: white;
 }

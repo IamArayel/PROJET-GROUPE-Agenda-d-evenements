@@ -3,29 +3,46 @@
 {% block title %}Inscription à {{ evenement.titre }}{% endblock %}
 
 {% block body %}
-    <div class="container mt-4">
+    <div class="max-w-2xl mx-auto">
         {% for label, messages in app.flashes %}
             {% for message in messages %}
-                <div class="alert alert-{{ label }}">
-                    {{ message }}
+                <div role="alert" class="alert alert-{{ label == 'success' ? 'success' : 'error' }} mb-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                    <span>{{ message }}</span>
                 </div>
             {% endfor %}
         {% endfor %}
 
-        <h1>Inscription à l'événement : {{ evenement.titre }}</h1>
+        <h1 class="text-3xl font-bold mb-6">Inscription à l'événement : {{ evenement.titre }}</h1>
 
-        <div class="card mb-4">
+        <div class="card bg-base-100 shadow-xl mb-8">
             <div class="card-body">
-                <p><strong>Date :</strong> {{ evenement.date ? evenement.date|date('d/m/Y') : 'Non définie' }}</p>
-                <p><strong>Lieu :</strong> {{ evenement.lieu }}</p>
+                <div class="flex items-center mb-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                    <span class="font-bold mr-2">Date :</span> {{ evenement.date ? evenement.date|date('d/m/Y') : 'Non définie' }}
+                </div>
+                <div class="flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                    <span class="font-bold mr-2">Lieu :</span> {{ evenement.lieu }}
+                </div>
             </div>
         </div>
 
-        {{ form_start(form) }}
-            {{ form_widget(form) }}
-            <button class="btn btn-primary mt-3">{{ button_label|default("S'inscrire") }}</button>
-        {{ form_end(form) }}
-
-        <a href="{{ path('app_events', {'id': evenement.id}) }}" class="btn btn-secondary mt-3">Retour à l'événement</a>
+        <div class="card bg-base-100 shadow-xl">
+            <div class="card-body">
+                {{ form_start(form, {'attr': {'class': 'space-y-4'}}) }}
+                    {{ form_widget(form) }}
+                    <div class="card-actions justify-end mt-6">
+                        <a href="{{ path('app_evenement_show', {'id': evenement.id}) }}" class="btn btn-ghost">Annuler</a>
+                        <button class="btn btn-primary">{{ button_label|default("S'inscrire") }}</button>
+                    </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
     </div>
 {% endblock %}
