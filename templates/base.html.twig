@@ -22,8 +22,10 @@
                     {% for categorie in categories|default([]) %}
                         <li>
                             {# Évite path() tant que la route Symfony n'existe pas #}
-                            <a href="/categorie/{{ categorie.id }}">
-                                {{ categorie.nom ?? categorie.name ?? 'Catégorie' }}
+                            <a href="#"
+                               class="js-categorie"
+                               data-id="{{ categorie.id }}">
+                                {{ categorie.nom }}
                             </a>
                         </li>
                     {% endfor %}

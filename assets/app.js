@@ -19,7 +19,7 @@ $(document).ready(function () {
         `);
 
         $.ajax({
-            url: '/evenement/categorie/' + categorieId,
+            url: '/evenements/categorie/' + categorieId,
             method: 'GET',
             success: function (html) {
                 $('#events-body').html(html);

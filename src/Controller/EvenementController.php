@@ -29,7 +29,12 @@ final class EvenementController extends AbstractController
     /**
      * Display details of a specific event.
      */
-    #[Route('/evenement/{id}', name: 'app_evenement_show', methods: ['GET'])]
+    #[Route(
+        '/evenement/{id}',
+        name: 'app_evenement_show',
+        requirements: ['id' => '\d+'],
+        methods: ['GET']
+    )]
     public function show(Evenement $evenement): Response
     {
         return $this->render('evenement/show.html.twig', [
@@ -37,7 +42,7 @@ final class EvenementController extends AbstractController
         ]);
     }
     #Route ajax
-    #[Route('/evenement/categorie/{id}', name: 'app_events_by_categorie', methods: ['GET'])]
+    #[Route('/evenements/categorie/{id}', name: 'app_events_by_categorie', methods: ['GET'])]
     public function byCategorie(
         Categorie $categorie,
         EvenementRepository $repository
