@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Evenement;
 use App\Entity\Inscription;
 use App\Form\InscriptionType;
+use App\Repository\CategorieRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,8 +15,12 @@ use Symfony\Component\Routing\Attribute\Route;
 class InscriptionController extends AbstractController
 {
     #[Route('/inscription/{id}', name: 'app_inscription_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, Evenement $evenement, EntityManagerInterface $entityManager): Response
-    {
+    public function new(
+        Request $request,
+        Evenement $evenement,
+        EntityManagerInterface $entityManager,
+        CategorieRepository $categorieRepository
+    ): Response {
         $inscription = new Inscription();
         $inscription->setRelation($evenement);
         $inscription->setCreatedAt(new \DateTime());
@@ -29,13 +34,14 @@ class InscriptionController extends AbstractController
 
             $this->addFlash('success', 'Votre inscription a bien été enregistrée.');
 
-            return $this->redirectToRoute('app_evenement_show', ['id' => $evenement->getId()]);
+            return $this->redirectToRoute('app_events');
         }
 
         return $this->render('inscription/new.html.twig', [
             'inscription' => $inscription,
             'evenement' => $evenement,
             'form' => $form,
+            'categories' => $categorieRepository->findAll(),
         ]);
     }
 }
