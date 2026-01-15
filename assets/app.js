@@ -1,10 +1,41 @@
 import './stimulus_bootstrap.js';
-/*
- * Welcome to your app's main JavaScript file!
- *
- * This file will be included onto the page via the importmap() Twig function,
- * which should already be in your base.html.twig.
- */
 import './styles/app.css';
 
-console.log('This log comes from assets/app.js - welcome to AssetMapper! 🎉');
+import $ from 'jquery';
+
+$(document).ready(function () {
+
+    $(document).on('click', '.js-categorie', function (e) {
+        e.preventDefault();
+
+        const categorieId = $(this).data('id');
+
+        $('#events-body').html(`
+            <tr>
+                <td colspan="4" class="text-center">
+                    Chargement...
+                </td>
+            </tr>
+        `);
+
+        $.ajax({
+            url: '/evenement/categorie/' + categorieId,
+            method: 'GET',
+            success: function (html) {
+                $('#events-body').html(html);
+            },
+            error: function () {
+                $('#events-body').html(`
+                    <tr>
+                        <td colspan="4" class="text-danger text-center">
+                            Erreur de chargement
+                        </td>
+                    </tr>
+                `);
+            }
+        });
+    });
+
+});
+
+console.log('JS catégories chargé ✅');

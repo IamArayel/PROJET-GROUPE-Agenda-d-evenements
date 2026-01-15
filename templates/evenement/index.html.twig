@@ -1,3 +1,7 @@
+{% extends 'base.html.twig'  %}
+
+{% block body %}
+
 <table class="table table-striped">
     <thead>
     <tr>
@@ -7,7 +11,7 @@
         <th>Catégorie</th>
     </tr>
     </thead>
-    <tbody>
+    <tbody id="events-body">
     {% for e in evenements %}
         <tr>
             <td>{{ e.titre }}</td>
@@ -22,3 +26,5 @@
     {% endfor %}
     </tbody>
 </table>
+
+{% endblock %}
