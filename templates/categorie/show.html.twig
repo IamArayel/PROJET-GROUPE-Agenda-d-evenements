@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Catégorie {{ categorie.nom ?? ('#' ~ categorie.id) }}
+{% endblock %}
+
+{% block body %}
+<h1>Catégorie</h1>
+
+<dl>
+    <dt>ID</dt>
+    <dd>{{ categorie.id }}</dd>
+
+    <dt>Nom</dt>
+    <dd>{{ categorie.nom ?? '—' }}</dd>
+
+    <dt>Couleur</dt>
+    <dd>{{ categorie.couleur ?? '—' }}</dd>
+
+    <dt>Icône</dt>
+    <dd>{{ categorie.icone ?? '—' }}</dd>
+</dl>
+
+<p>
+    <a href="{{ path('app_categorie') }}">Retour à la liste</a>
+</p>
+{% endblock %}

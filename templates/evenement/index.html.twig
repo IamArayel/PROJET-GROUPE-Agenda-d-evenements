@@ -1,31 +1,24 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}Liste des événements{% endblock %}
-
-{% block body %}
-    <div class="container mt-4">
-        <h1>Événements à venir</h1>
-
-        <div class="row">
-            {% for evenement in evenements %}
-                <div class="col-md-4 mb-4">
-                    <div class="card h-100">
-                        {% if evenement.image %}
-                            <img src="{{ evenement.image }}" class="card-img-top" alt="{{ evenement.titre }}">
-                        {% endif %}
-                        <div class="card-body">
-                            <h5 class="card-title">{{ evenement.titre }}</h5>
-                            <p class="card-text text-truncate">{{ evenement.description }}</p>
-                            <p class="card-text"><small class="text-muted">{{ evenement.date ? evenement.date|date('d/m/Y') : '' }} - {{ evenement.lieu }}</small></p>
-                            <a href="{{ path('app_evenement_show', {'id': evenement.id}) }}" class="btn btn-primary">Voir plus</a>
-                        </div>
-                    </div>
-                </div>
-            {% else %}
-                <div class="col-12">
-                    <p>Aucun événement trouvé.</p>
-                </div>
-            {% endfor %}
-        </div>
-    </div>
-{% endblock %}
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>Titre</th>
+        <th>Date</th>
+        <th>Lieu</th>
+        <th>Catégorie</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for e in evenements %}
+        <tr>
+            <td>{{ e.titre }}</td>
+            <td>{{ e.date|date('d/m/Y') }}</td>
+            <td>{{ e.lieu }}</td>
+            <td>{{ e.relation.nom }}</td>
+        </tr>
+    {% else %}
+        <tr>
+            <td colspan="4">Aucun événement à venir</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
