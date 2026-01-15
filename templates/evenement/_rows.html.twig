@@ -1,0 +1,18 @@
+{% for e in evenements %}
+    <tr>
+        <td>
+            <a href="{{ path('app_evenement_show', {'id': e.id}) }}">
+                {{ e.titre }}
+            </a>
+        </td>
+        <td>{{ e.date|date('d/m/Y') }}</td>
+        <td>{{ e.lieu }}</td>
+        <td>{{ e.relation.nom }}</td>
+    </tr>
+{% else %}
+    <tr>
+        <td colspan="4" class="text-center">
+            Aucun événement pour cette catégorie
+        </td>
+    </tr>
+{% endfor %}
