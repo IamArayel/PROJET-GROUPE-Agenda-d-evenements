@@ -13,24 +13,24 @@
         {% endblock %}
     </head>
     <body>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="{{ path('app_events') }}">Agenda</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ path('app_events') }}">Événements</a>
+        <header>
+            <nav aria-label="Navigation principale">
+                <a href="/">Accueil</a>
+
+                <span style="margin-left: 1rem;">Catégories :</span>
+                <ul style="display:inline-flex; gap:.75rem; list-style:none; padding:0; margin:.5rem 0 0 0;">
+                    {% for categorie in categories|default([]) %}
+                        <li>
+                            {# Évite path() tant que la route Symfony n'existe pas #}
+                            <a href="/categorie/{{ categorie.id }}">
+                                {{ categorie.nom ?? categorie.name ?? 'Catégorie' }}
+                            </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ path('app_admin_inscription_index') }}">Admin Inscriptions</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+                    {% endfor %}
+                </ul>
+            </nav>
+        </header>
+
         {% block body %}{% endblock %}
     </body>
 </html>
