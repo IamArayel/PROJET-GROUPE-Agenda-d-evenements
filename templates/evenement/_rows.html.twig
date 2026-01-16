@@ -6,7 +6,7 @@
         <div class="card-body">
             <h2 class="card-title">
                 {{ evenement.titre }}
-                <div class="badge badge-secondary">{{ evenement.relation.nom }}</div>
+                <div class="badge" style="background-color: {{ evenement.relation.couleur }}">{{ evenement.relation.icone }} {{ evenement.relation.nom }}</div>
             </h2>
             <p class="truncate">{{ evenement.description }}</p>
             <div class="flex items-center text-sm text-gray-500 mt-2">

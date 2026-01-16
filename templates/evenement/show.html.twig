@@ -18,7 +18,7 @@
         {% endif %}
         <div class="card-body">
             <h1 class="card-title text-3xl">{{ evenement.titre }}</h1>
-            <div class="badge badge-secondary mb-4">{{ evenement.relation.nom }}</div>
+            <div class="badge" style="background-color: {{ evenement.relation.couleur }}">{{ evenement.relation.icone }} {{ evenement.relation.nom }}</div>
 
             <p class="text-lg">{{ evenement.description }}</p>
 
